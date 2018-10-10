@@ -10,4 +10,3 @@ Filé
 Chatbot para Telegram
 
 O mais avançado bot da zoeira
-===
