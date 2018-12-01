@@ -1,0 +1,6 @@
+
+
+[default]
+API_KEY=<API_TOKEN>
+API_TELEGRAM=https://api.telegram.org
+ENDPOINT=https://url.com
