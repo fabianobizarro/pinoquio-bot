@@ -35,8 +35,12 @@ class UpdateInfo():
         return self.update.message.caption_entities
 
     @property
-    def hastags(self):
+    def hashtags(self):
         return [c for c in self.entities if c.type == 'hashtag']
+
+    @property
+    def has_hastags(self):
+        return len(self.hashtags) > 0
 
     @property
     def chat_type(self):
@@ -92,5 +96,3 @@ class UpdateInfo():
 
     def is_allowed_chat(self, chats: list):
         return self.chat_id in chats
-
-    

@@ -119,3 +119,7 @@ dmypy.json
 **/data/*.chats
 
 *.ini
+
+
+logs/
+.vscode

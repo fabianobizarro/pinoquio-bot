@@ -1,6 +1,8 @@
 import nltk
 from .util import read_json_file
 from pybot.exceptions import NotRecognizedError
+from updateinfo import UpdateInfo
+
 
 class PyBot:
 
@@ -26,12 +28,12 @@ class PyBot:
         else:
             return None
 
-    def interact(self, phrase: str):
+    def interact(self, phrase: str, context: UpdateInfo = None):
 
         classification = self.classify(phrase)
         action = self._get_action(classification[0])
         if action:
-            response = action([phrase])
+            response = action([phrase], context)
 
             if response is None:
                 raise ValueError('Action must return a response')
