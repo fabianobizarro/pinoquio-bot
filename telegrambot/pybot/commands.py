@@ -1,7 +1,7 @@
 import random
 import json
-from data import get_frases
-from updateinfo import UpdateInfo
+from telegrambot.data import get_frases
+from telegrambot.updateinfo import UpdateInfo
 
 
 def frase_aleatoria(text: str, context: UpdateInfo = None):

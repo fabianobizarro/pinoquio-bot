@@ -1,7 +1,7 @@
 import nltk
 from .util import read_json_file
-from pybot.exceptions import NotRecognizedError
-from updateinfo import UpdateInfo
+from telegrambot.pybot.exceptions import NotRecognizedError
+from telegrambot.updateinfo import UpdateInfo
 
 
 class PyBot:

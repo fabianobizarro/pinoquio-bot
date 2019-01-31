@@ -1,19 +1,17 @@
 import logging
 import requests
-import env
-import data
-from updateinfo import UpdateInfo
-import pybot.commands as commands
-from pybot import PyBot
+import telegrambot.env as env
+import telegrambot.data as data
+from telegrambot.updateinfo import UpdateInfo
+import telegrambot.pybot.commands as commands
+from telegrambot.pybot import PyBot
 from nltk.stem.rslp import RSLPStemmer
-from pybot.exceptions import NotRecognizedError
+from telegrambot.pybot.exceptions import NotRecognizedError
 
 logger = logging.getLogger()
 
 CMD_FRASE = '/frase'
 CMD_AUTORES = '/autores'
-
-
 
 
 def send_message(chat_id: int, text: str, reply_to_message_id: int = None):

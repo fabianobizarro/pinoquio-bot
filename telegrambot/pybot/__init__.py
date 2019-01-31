@@ -1,3 +1,3 @@
 
-from pybot.bot import *
+from telegrambot.pybot.bot import *
 
