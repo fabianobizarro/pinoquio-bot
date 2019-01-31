@@ -51,3 +51,6 @@ def initialize():
         'ALLOWED_CHATS': config['allowed_chats']
     })
     print('done')
+
+if __name__ == '__main__':
+    initialize()
