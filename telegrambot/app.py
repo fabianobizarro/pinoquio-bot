@@ -1,7 +1,8 @@
 import os
 import json
 from telegram import Update
-from flask import Flask, request
+from flask import Flask, request, abort
+from flask_
 from .updateinfo import UpdateInfo
 import telegrambot.api as api
 import telegrambot.env as env
@@ -34,4 +35,4 @@ def webhook():
 
     except Exception as ex:
         print(ex)
-        return 'error'
+        abort(500)
