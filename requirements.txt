@@ -1,5 +1,5 @@
 python-telegram-bot==11.1.0
 Flask==1.0.2
-requests==2.91.1
+requests==2.21.0
 python-dotenv==0.10.1
 nltk==3.4
