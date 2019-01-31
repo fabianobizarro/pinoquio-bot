@@ -1,22 +1,23 @@
+import os
 import json
 from telegram import Update
 from flask import Flask, request
 from .updateinfo import UpdateInfo
 import telegrambot.api as api
+import telegrambot.env as env
 
-
-# def create_app(*args, **kwargs):
-
-    # print(args)
-    # print(kwargs)
 
 app = Flask(__name__)
+
+webhook_route = '/{}'.format(env.ENDPOINT)
+
 
 @app.route('/')
 def index():
     return 'voce curte?'
 
-@app.route('/API_KEY', methods=['POST'])
+
+@app.route(webhook_route, methods=['POST'])
 def webhook():
 
     try:
@@ -34,5 +35,3 @@ def webhook():
     except Exception as ex:
         print(ex)
         return 'error'
-
-    # return app

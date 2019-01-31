@@ -7,9 +7,10 @@ from telegrambot.updateinfo import UpdateInfo
 from telegrambot.app import app
 import telegrambot.api as api
 import telegrambot.env as env
+import gunicorn
 
 
-def custom_handler(bot: Bot, update: Update):
+def base_handler(bot: Bot, update: Update):
     info = UpdateInfo(update)
     api.process_request(info)
 
@@ -20,12 +21,11 @@ print('app running in %s mode' %
 if __name__ == "__main__":
 
     if env.ENVIRONMENT == 'production':
-        # app = create_app()
         app.run(port=os.getenv('PORT'))
     else:
         updater = Updater(env.API_KEY)
         updater.dispatcher.add_handler(MessageHandler(
-            Filters.text | Filters.photo | Filters.command, custom_handler))
+            Filters.text | Filters.photo | Filters.command, base_handler))
         updater.start_polling()
         print('running...')
         updater.idle()
