@@ -10,11 +10,20 @@ import telegrambot.env as env
 
 dictConfig({
     'version': 1,
-    'formatters':{
+    'formatters': {
         'default': {
             'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s'
         }
     },
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
 })
 
 logger = logging.getLogger()
@@ -43,7 +52,6 @@ def webhook():
         update = Update.de_json(json_params, None)
         info = UpdateInfo(update)
         logger.info(info)
-
 
         api.process_request(info)
 
