@@ -1,3 +1,4 @@
+import os
 import json
 from telegram import Chat, Update, Message
 from telegram.ext import Updater, MessageHandler, ConversationHandler
@@ -54,7 +55,7 @@ if __name__ == "__main__":
 
     if env.ENVIRONMENT == 'production':
         app = create_app()
-        app.run(port=env.PORT)
+        app.run(port=os.getenv('PORT'))
     else:
         updater = Updater(env.API_KEY)
         updater.dispatcher.add_handler(MessageHandler(Filters.text | Filters.photo | Filters.command, custom_handler))
