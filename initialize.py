@@ -20,7 +20,7 @@ def map_train(train: dict):
     }
 
 
-def initialize():
+def initialize_config_data():
 
     print('initializing values from database')
     print('connection to database')
@@ -61,9 +61,14 @@ def initialize_nltk_data():
     download('rslp')
 
 
-if __name__ == '__main__':
+def initialize():
     override = os.getenv('OVERRIDE_INIT') or False
-    if override:
+    print(bool(override) or override == 'True')
+    if bool(override) or override == 'True':
         print('Initializing data')
-        initialize()
+        initialize_config_data()
         initialize_nltk_data()
+
+
+if __name__ == '__main__':
+    initialize()
