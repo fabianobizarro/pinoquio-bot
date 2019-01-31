@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import logging
 from logging.config import dictConfig
@@ -42,7 +43,6 @@ def index():
 def webhook():
 
     try:
-
         logger.info(request.data)
         params = request.data.decode('utf-8')
         logger.info(params)
@@ -58,5 +58,7 @@ def webhook():
         return 'ok'
 
     except Exception as ex:
-        logger.error(ex)
+        _, _, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        logger.error('{file} line {line} - {error}'.format(file=fname, line=exc_tb.tb_lineno, error=ex))
         abort(500)
