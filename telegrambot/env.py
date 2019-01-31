@@ -13,3 +13,4 @@ BOT_ENDPOINT = os.getenv('ENDPOINT')
 TELEGRAM_API_ENDPOINT = os.getenv('API_TELEGRAM')
 ENVIRONMENT = os.getenv('ENV') or 'development'
 ENDPOINT = os.getenv('ENDPOINT')
+MONGODB_URI = os.getenv('MONGODB_URI')
