@@ -1,6 +1,9 @@
+import os
 from pymongo import MongoClient
+from nltk import download
 import telegrambot.env as env
 import telegrambot.data as data
+from nltk import download
 
 
 def map_frase(frase: dict):
@@ -52,5 +55,15 @@ def initialize():
     })
     print('done')
 
+
+def initialize_nltk_data():
+    download('punkt')
+    download('rslp')
+
+
 if __name__ == '__main__':
-    initialize()
+    override = os.getenv('OVERRIDE_INIT') or False
+    if override:
+        print('Initializing data')
+        initialize()
+        initialize_nltk_data()
