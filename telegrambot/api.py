@@ -27,8 +27,7 @@ def send_message(chat_id: int, text: str, reply_to_message_id: int = None):
     }
 
     r = requests.post(url, json=request_data)
-
-    logger.info(r.status_code)
+    logger.info('request sent to Telegram API. StatusCode: {}'.format(r.status_code))
 
 
 def process_request(info: UpdateInfo):
@@ -37,8 +36,12 @@ def process_request(info: UpdateInfo):
     allowed_chat = info.is_allowed_chat(data.get_allowed_chats())
     allowed_to_reply = info.is_allowed_to_reply()
 
+    logger.info('allowed chat and allowed to reply: {}'.format(
+        allowed_chat and allowed_to_reply))
+
     if (allowed_chat and allowed_to_reply):
         resposta = process_reply(info.text, info)
+        logger.info('resposta: %s' % resposta)
         if resposta:
             reply_id = info.message_id \
                 if info.is_chat_type_group \
@@ -70,14 +73,12 @@ def process_reply(text: str, info: UpdateInfo):
             reply = commands.listar_autores(info.text, info)
             return reply
         else:
-            # nothing
             return None
     else:
         try:
             message = info.text.lower()
             bot = initialize_bot()
             reply = bot.interact(message, info)
-            logger.info(reply)
             return reply
         except NotRecognizedError:
             return 'Desculpe, não entendi o que você disse'
