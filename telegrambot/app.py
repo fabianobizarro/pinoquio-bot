@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     if env.ENVIRONMENT == 'production':
         app = create_app()
-        app.run()
+        app.run(port=env.PORT)
     else:
         updater = Updater(env.API_KEY)
         updater.dispatcher.add_handler(MessageHandler(Filters.text | Filters.photo | Filters.command, custom_handler))
