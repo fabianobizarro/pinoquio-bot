@@ -33,7 +33,6 @@ def send_message(chat_id: int, text: str, reply_to_message_id: int = None):
 
 def process_request(info: UpdateInfo):
 
-    logger.info(data.DATA_PATH)
     chat_id = info.chat_id
     allowed_chat = info.is_allowed_chat(data.get_allowed_chats())
     allowed_to_reply = info.is_allowed_to_reply()

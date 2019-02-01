@@ -1,2 +1,1 @@
-worker: python initialize.py
-web: gunicorn telegrambot.app:app
+web: python initialize.py && gunicorn telegrambot.app:app
