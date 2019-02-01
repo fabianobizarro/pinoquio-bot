@@ -33,32 +33,28 @@ def send_message(chat_id: int, text: str, reply_to_message_id: int = None):
 
 def process_request(info: UpdateInfo):
 
-    try:
-        chat_id = info.chat_id
-        allowed_chat = info.is_allowed_chat(data.get_allowed_chats())
-        allowed_to_reply = info.is_allowed_to_reply()
+    logger.info(data.DATA_PATH)
+    chat_id = info.chat_id
+    allowed_chat = info.is_allowed_chat(data.get_allowed_chats())
+    allowed_to_reply = info.is_allowed_to_reply()
 
-        logger.info('allowed chat and allowed to reply: {}'.format(
-            allowed_chat and allowed_to_reply))
+    logger.info('allowed chat and allowed to reply: {}'.format(
+        allowed_chat and allowed_to_reply))
 
-        if (allowed_chat and allowed_to_reply):
-            resposta = process_reply(info.text, info)
-            logger.info('resposta: %s' % resposta)
-            if resposta:
-                reply_id = info.message_id \
-                    if info.is_chat_type_group \
-                    else None
+    if (allowed_chat and allowed_to_reply):
+        resposta = process_reply(info.text, info)
+        logger.info('resposta: %s' % resposta)
+        if resposta:
+            reply_id = info.message_id \
+                if info.is_chat_type_group \
+                else None
 
-                send_message(
-                    chat_id,
-                    resposta,
-                    reply_id)
-        else:
-            logger.warn('not allowed to reply')
-
-    except Exception as ex:
-        raise ex
-
+            send_message(
+                chat_id,
+                resposta,
+                reply_id)
+    else:
+        logger.warn('not allowed to reply')
 
 def process_reply(text: str, info: UpdateInfo):
 

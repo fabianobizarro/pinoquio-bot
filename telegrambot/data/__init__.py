@@ -2,6 +2,9 @@ import json
 import os
 from telegram import Update
 from configparser import ConfigParser, SectionProxy
+import logging
+
+logger = logging.getLogger()
 
 DATA_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -17,6 +20,7 @@ def get_allowed_chats():
 def get_bot_config() -> SectionProxy:
     config = ConfigParser()
     config.read(DATA_PATH + '/.config.ini')
+    logger.info(config)
     return config['default']
 
 
