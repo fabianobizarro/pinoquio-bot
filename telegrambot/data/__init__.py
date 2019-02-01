@@ -19,8 +19,10 @@ def get_allowed_chats():
 
 def get_bot_config() -> SectionProxy:
     config = ConfigParser()
-    config.read(DATA_PATH + '/.config.ini')
+    config.read(DATA_PATH + '/config.ini')
+    logger.info(DATA_PATH + '/config.ini')
     logger.info(config)
+    logger.info(config.keys())
     return config['default']
 
 
@@ -28,7 +30,7 @@ def load_bot_config(configs: dict):
     config = ConfigParser()
     config['default'] = configs
 
-    with open(DATA_PATH + '/.config.ini', 'w') as file:
+    with open(DATA_PATH + '/config.ini', 'w') as file:
         config.write(file)
 
 
