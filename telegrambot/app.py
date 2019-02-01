@@ -8,6 +8,7 @@ from flask import Flask, request, abort
 from .updateinfo import UpdateInfo
 import telegrambot.api as api
 import telegrambot.env as env
+import traceback
 
 dictConfig({
     'version': 1,
@@ -58,7 +59,10 @@ def webhook():
         return 'ok'
 
     except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        logger.error('{file} line {line} - {error}'.format(file=fname, line=exc_tb.tb_lineno, error=ex))
+        # _, _, exc_tb = sys.exc_info()
+        # fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        # logger.error('{file} line {line} - {error}'.format(file=fname, line=exc_tb.tb_lineno, error=ex))
+        tb = traceback.format_exc()
+        logger.error(ex)
+        logger.error(tb)
         abort(500)
